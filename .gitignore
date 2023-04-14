@@ -1,2 +1,8 @@
 datasets/
 *.txt
+__pycache__
+upload_folder
+runs/
+bacteria_env/
+testdeployments/templates/
+testdeployments/notForGithub/
