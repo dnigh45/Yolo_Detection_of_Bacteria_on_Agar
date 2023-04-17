@@ -91,12 +91,16 @@ The final model was then deployed via [Flask](https://palletsprojects.com/p/flas
 
 Below is a demostration of the application in action:
 
-<video src='images/appdemo.mp4' width=180/>
+
+
+https://user-images.githubusercontent.com/80785218/232555226-9a4f5260-d528-4ff0-b833-52442fe9c9d7.mp4
+
+
 
 The [bacteria_env](bacteria_env) is required for this application to run properly.
 
 #### Results
-My final YOLO model takes images as input and consists of __many__ hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output is then passed to the next layer to detect more complicated features. This continues until the final output layer. YOLO utilizes parrellel processing of the image to classify objects as well as regress around the objects. This allows the model to be much faster than dual stage detectors such as faster RCNN. For those of you interested, here is [Ultralytics github](https://github.com/ultralytics/ultralytics). 
+My final YOLO model takes images as input and consists of __many__ hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output is then passed to the next layer to detect more complicated features. This continues until the final output layer. YOLO utilizes parrellel processing of the image to classify objects as well as regress around the objects. This allows the model to be much faster than dual stage detectors such as faster RCNN. For those of you interested, here is [Ultralytic's github](https://github.com/ultralytics/ultralytics). 
 
 
 During training, the model continues to refine the layers and adjust the weight of specific neurons until it can no longer improve itself. After 10 epochs of no improvement, the model will stop itself and save the model at whichever epoch had the highest score. My model precede to run for 87 epochs before leveling out and stopping itself at 97 epochs. This model was then saved and utilized in the application deployment. 
