@@ -6,3 +6,4 @@ runs/
 bacteria_env/
 testdeployments/templates/
 testdeployments/notForGithub/
+data/
