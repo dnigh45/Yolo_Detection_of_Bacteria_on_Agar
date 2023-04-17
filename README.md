@@ -39,7 +39,6 @@ Dietrich Nigh
 
 ## Bottom Line
 
-
 Bacterial classification is essential for many medical diagnostics, yet it is massively time consuming and laborious. 
 
 ## Data Preparation
@@ -47,74 +46,21 @@ Data was filtered for blank agar plates, leaving me with 12,272. The data was th
 
 
 ## Baseline Model
+
 The baseline model was a 3 epoch YOLO model. This model netted a 
 
-
-
+metrics: here
 
 ## Exploratory Modeling
-For our second model, we improved on our first model idea. We constructed a one dimensional sequential model with sigmoid activation. We scored the model and got 
+For our second model, we improved on our first model, using the pretrained weights from the YOLO repository, we performed a 10 epoch training regement. This vastly improved my performance.
 
-
-{'loss': 0.3634476661682129,
- 
-'recall': 0.9205127954483032,
- 
-'accuracy': 0.8605769276618958}
-
-
-
-
-## First Convolutional Neural Network
-As our final model draft we opted for a CNN with two hidden layers (32, 128) with ‘relu’ activation function. Our dropout rate was 25%. We had two dense layers (64, 1) with ‘sigmoid’ activation. Our first CNN model results are as follows:
-
-
-{'loss': 0.29642075300216675,
- 
-'recall': 0.8846153616905212,
-'accuracy': 0.879807710647583}
-
-
-
-
-
-
-
-
-## Finding Optimal Model
-
-
-### GridSearch & Architecture Search
-We did a gridsearch with the following parameters:    
-
-
-'learning_rate': [0.001, 0.01, 0.1],
-
-
-  
-'num_filters': [32, 64, 128],
- 
-   
-'filter_size': [(3,3), (5,5)],
-   
- 
-'dropout_rate': [0.2, 0.5],
-
-
-    
-'activation': ['relu', 'sigmoid']
-
-
-The GridSearch gave us the output: Best: 0.654545 using {'activation': 'sigmoid','dropout_rate': 0.5, 'filter_size': (5, 5), 'learning_rate': 0.1, 'num_filters': 128}
-
-
-Architecture search involved 64 models with the highest score of 0.92 recall. 
-
-
-
+metrics: here
 
 ## Final Model
 ![Final Model](images/finalmodel.png)
+
+## Final Model Deployment
+
 
 
 #### Results
@@ -127,12 +73,4 @@ During training, the model uses the binary cross-entropy loss function to optimi
 After training, the test set is introduced to the model to test the score on unseen data. Here’s the final scores:
 
 
-{'loss': 0.31401559710502625,
- 
 
-
-'recall_1': 0.9846153855323792,
- 
-
-
-'accuracy': 0.8942307829856873}
