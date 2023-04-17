@@ -1,9 +1,9 @@
 datasets/
+bacteria_env/
 *.txt
 __pycache__
 upload_folder
 runs/
-bacteria_env/
 testdeployments/templates/
 testdeployments/notForGithub/
 data/
