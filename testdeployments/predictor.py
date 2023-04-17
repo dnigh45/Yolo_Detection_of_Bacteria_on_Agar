@@ -3,5 +3,5 @@ import sys
 
 file = input('Enter file to predict on: ')
 
-model = YOLO('./runs/detect/train8/weights/best.pt')
+model = YOLO('../models_train/97epoch.pt')
 model.predict(source=str(file), save= True)
