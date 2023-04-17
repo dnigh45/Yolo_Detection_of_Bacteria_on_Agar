@@ -32,7 +32,6 @@ Dietrich Nigh
 
 #### Limitations of Our Data
 
-
 * Dataset was relatively small
 * Dataset only contained five species of bacteria
 
@@ -43,34 +42,66 @@ Bacterial classification is essential for many medical diagnostics, yet it is ma
 
 ## Data Preparation
 Data was filtered for blank agar plates, leaving me with 12,272. The data was then split into train, test, and validation sets: 6903 train, 2301 validation, 3068 test images. With the use of a YOLO, data formatting was extremely important. As such, annotations were converted from a generic format to [Kitti format](https://github.com/bostondiditeam/kitti/blob/master/resources/devkit_object/readme.txt). From Kitti format, the data was then converted to YOLO format. The directories were also constructed in a format understandable to YOLO (see tree image below).
-
+![tree](images/treeimage.jpg)
+###### Example Image
+![example image](images/938.jpg)
+###### Example Labels in Kitti format
+![example labels](images/938txt.jpg)
 
 ## Baseline Model
 
-The baseline model was a 3 epoch YOLO model. This model netted a 
+The baseline model was a 3 epoch YOLO model. This model netted a relatively low performing model.
 
-metrics: here
+metrics: 
+
+__mAP50__ = 0.552
+__mAP50-95__ = 0.306
 
 ## Exploratory Modeling
 For our second model, we improved on our first model, using the pretrained weights from the YOLO repository, we performed a 10 epoch training regement. This vastly improved my performance.
 
-metrics: here
+metrics: 
+
+__mAP50__ = 0.891
+__mAP50-95__ = 0.570
 
 ## Final Model
-![Final Model](images/finalmodel.png)
+The final model took the pre-trained weights from the 10 epoch model and continued to train this for a another [97 epochs](models_train/97epoch.pt) [using these paramaters](images/args.yaml). This model performed very well on the validation data. The mAP50 score was 0.971 and the mAP50-95 score was 0.701. The classification recall was 0.946. Below you can find the precision-call curve (the closer to the top right corner, the 'better' the model performed), the confusion matrix, as well as an example of validation images with their predicition scores.
+
+###### Precision Recall Curve
+<img src='images/PR_curve.png' width="720" height="540" />
+
+###### Confusion Matrix
+<img src='images/confusion_matrix.png' width="720" height="540" />
+
+###### Example Output
+<img src='images/val_batch1_pred.jpg' width="720" height="540" />
+
+
 
 ## Final Model Deployment
+The final model was then deployed via [Flask](https://palletsprojects.com/p/flask/). [The application](webapp.py) has a basic interface due to my inexperience using html. Here is a basic summary of it's capabilities:
+* Take in .jpg, .jpeg, or .png files
+* Return an annotated copy of the image to the user
+    * Page includes:
+        * Image with bounding boxes (different colors for different species)
+        * Per class count of colonies on the plate
+        * Legend of bounding box colors 
+* Take you to the home screen for another round of object detection
 
+Below is a demostration of the application in action:
 
+<video src='images/appdemo.mp4' width=180/>
+
+The [bacteria_env](bacteria_env) is required for this application to run properly.
 
 #### Results
-Our final CNN model takes chest x-ray images as input and consists of three hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output of this layer is then passed through a 'relu' activation function. The second layer is a max-pooling layer that reduces the spatial dimensions of the output from the first layer.  The third layer is a fully connected layer that combines the features learned in the previous layers to produce the final output.
+My final YOLO model takes images as input and consists of __many__ hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output is then passed to the next layer to detect more complicated features. This continues until the final output layer. YOLO utilizes parrellel processing of the image to classify objects as well as regress around the objects. This allows the model to be much faster than dual stage detectors such as faster RCNN. For those of you interested, here is [Ultralytics github](https://github.com/ultralytics/ultralytics). 
 
 
-During training, the model uses the binary cross-entropy loss function to optimize the model parameters using the Adam optimizer with a learning rate of 0.01. In addition, we use two callbacks to improve the training process. The EarlyStopping callback monitors the validation accuracy and stops the training process if there is no improvement in the validation accuracy for 10 epochs. The ReduceLROnPlateau callback reduces the learning rate by a factor of 0.85 if the validation accuracy does not improve after 5 epochs, with a minimum learning rate of 0.0001. The model is trained for a maximum of 200 epochs on a dataset of chest x-ray images labeled as normal or pneumonia.
+During training, the model continues to refine the layers and adjust the weight of specific neurons until it can no longer improve itself. After 10 epochs of no improvement, the model will stop itself and save the model at whichever epoch had the highest score. My model precede to run for 87 epochs before leveling out and stopping itself at 97 epochs. This model was then saved and utilized in the application deployment. 
 
 
-After training, the test set is introduced to the model to test the score on unseen data. Here’s the final scores:
+After training, the test set is introduced to the model to test the score on unseen data. Here are the final scores:
 
-
-
+![results](images/resultsscreenshot.jpg)
