@@ -26,9 +26,9 @@ Dietrich Nigh
 
 ## Business Understanding of the Problem
 
-Since the discovery of bacteria in the 17th century, scientists have been trying to identify and classify those tiny specs under the microscope. In the 19th century, Julius Richard Petri, a German physician working under the famous Robert Koch, developed his namesake, the Petri dish, for this purpose. He needed to reliably grow bacteria without risk of containmination so he could accurately study his specimens. Since that time, the classification of bacteria has come a long way. Many bacterial samples can be sequenced to elucidate all of their secrets. That said, the Petri dish is still a critical tool in the culturing and classification of bacterial samples. 
+Since the discovery of bacteria in the 17th century, scientists have been trying to identify and classify those tiny specs under the microscope. In the 19th century, Julius Richard Petri, a German physician working under the famous Robert Koch, developed his namesake, the Petri dish, for this purpose. He needed to reliably grow bacteria without risk of contamination so he could accurately study his specimens. Since that time, the classification of bacteria has come a long way. Many bacterial samples can be sequenced to elucidate all of their secrets. That said, the Petri dish is still a critical tool in the culturing and classification of bacterial samples. 
 
-Presently, the identification of bacteria is a laborious and time consuming task. This is not to mention the years of training needed to properly perform the task. Even still mistakes can be made. To reduce the cost (both in time and money), recent years have seen an explosion of research into the construction machine learning models to correctly identify bacteria from a sample. Agar plates (Petri dishes with agar media) are a widely available, affordable, and effective means of growing isolated samples. If a model could be made to quickly and accurately differiante bacteria based on their growth, medical diagnostics could be done quickly with less training for technicians. For research applications, time spent memorizing such works as Bergey's Manual could be diverted elsewhere.
+Presently, the identification of bacteria is a laborious and time consuming task. This is not to mention the years of training needed to properly perform the task. Even still mistakes can be made. To reduce the cost (both in time and money), recent years have seen an explosion of research into the construction machine learning models to correctly identify bacteria from a sample. Agar plates (Petri dishes with agar media) are a widely available, affordable, and effective means of growing isolated samples. If a model could be made to quickly and accurately differentiate bacteria based on their growth, medical diagnostics could be done quickly with less training for technicians. For research applications, time spent memorizing such works as Bergey's Manual could be diverted elsewhere.
 
 The model chosen for this task is YOLO. YOLO is a single stage object detection model from Ultralytics with many hidden layers. YOLO is a single stage detector, meaning it performs regression around the object of interest and the classification of said image in parallel. This makes it much faster than dual-stage detectors, like Faster RCNN, which perform these tasks sequentially. The model is also relatively lightweight once trained. The model was developed for such tasks as live object detection after all. With this model we were able to construct a highly precise model.
 
@@ -127,4 +127,6 @@ This represents a 76% and 129% improvement over the baseline in mAP50 and mAP50-
 
 Below is a summary of all results:
 
-![results](images/resultsscreenshot.jpg)
+| box_loss | cls_loss | dfl_loss | precision | recall | mAP50 | map50-95 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.969  | 0.39184  | 1.0861  | 0.966  | 0.946  | 0.971  | 0.701  |
