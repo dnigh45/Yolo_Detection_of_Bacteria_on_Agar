@@ -28,9 +28,11 @@ Dietrich Nigh
 
 Since the discovery of bacteria in the 17th century, scientists have been trying to identify and classify those tiny specs under the microscope. In the 19th century, Julius Richard Petri, a German physician working under the famous Robert Koch, developed his namesake, the Petri dish, for this purpose. He needed to reliably grow bacteria without risk of contamination so he could accurately study his specimens. Since that time, the classification of bacteria has come a long way. Many bacterial samples can be sequenced to elucidate all of their secrets. That said, the Petri dish is still a critical tool in the culturing and classification of bacterial samples. 
 
-Presently, the identification of bacteria is a laborious and time consuming task. This is not to mention the years of training needed to properly perform the task. Even still mistakes can be made. To reduce the cost (both in time and money), recent years have seen an explosion of research into the construction machine learning models to correctly identify bacteria from a sample. Agar plates (Petri dishes with agar media) are a widely available, affordable, and effective means of growing isolated samples. If a model could be made to quickly and accurately differentiate bacteria based on their growth, medical diagnostics could be done quickly with less training for technicians. For research applications, time spent memorizing such works as Bergey's Manual could be diverted elsewhere.
+Presently, the identification of bacteria is a laborious and time consuming task. This is not to mention the years of training needed to properly perform the task. Even still, mistakes are made. To reduce the cost (both in time and money), recent years have seen an explosion of research into the construction machine learning models to correctly identify bacteria from a sample. Agar plates (Petri dishes with agar media) are a widely available, affordable, and effective means of growing isolated samples. If a model could be made to quickly and accurately differentiate bacteria based on their growth, medical diagnostics could be done quickly with less training for technicians. For research applications, time spent memorizing such works as Bergey's Manual could be diverted elsewhere.
 
-The model chosen for this task is YOLO. YOLO is a single stage object detection model from Ultralytics with many hidden layers. YOLO is a single stage detector, meaning it performs regression around the object of interest and the classification of said image in parallel. This makes it much faster than dual-stage detectors, like Faster RCNN, which perform these tasks sequentially. The model is also relatively lightweight once trained. The model was developed for such tasks as live object detection after all. With this model we were able to construct a highly precise model.
+The model chosen for this task is YOLO. YOLO is a single stage object detection model from Ultralytics with many hidden layers. YOLO is a single stage detector, meaning it performs regression around the object of interest and the classification of said image in parallel. This makes it much faster than dual-stage detectors, like Faster RCNN, which perform these tasks sequentially. The model is also relatively lightweight once trained. The model was developed for such tasks as live object detection after all. With this framework I was able to construct a precise model.
+
+If able, I would like to acquire more funding to expand the species imaged. This would require many more agar plates, a team of annotators, retraining of the model, and finally a more polished deployment. Hopefully, I would be able to license this product as well.
 
 <img src='https://editor.analyticsvidhya.com/uploads/1512812.png' width="540" height="270" />
 
@@ -46,7 +48,7 @@ The model chosen for this task is YOLO. YOLO is a single stage object detection 
 Bacterial classification is essential for many medical and research diagnostics, yet it is massively time consuming and laborious. 
 
 ## Data Preparation
-Data was filtered for blank agar plates, leaving me with 12,272 images. The data was then split into train, test, and validation sets: 6903 train, 2301 validation, 3068 test images. With the use of YOLO, data formatting was extremely important. As such, annotations were converted from a generic format to [Kitti format](https://github.com/bostondiditeam/kitti/blob/master/resources/devkit_object/readme.txt). From Kitti format, the data was then converted to YOLO format. The directories were also constructed in a format understandable to YOLO (see tree image below).
+Data was filtered for blank agar plates, leaving me with 12,272 images. The data was then split into train, test, and validation sets: 6903, 2301, and 3068 images respectively. With the use of YOLO, data formatting was extremely important. As such, annotations were converted from a generic format to [Kitti format](https://github.com/bostondiditeam/kitti/blob/master/resources/devkit_object/readme.txt). From Kitti format, the data was converted to YOLO format. The directories were also constructed in a format understandable to YOLO (see tree image below).
 
 ![tree](images/treeimage.jpg)
 
@@ -58,7 +60,7 @@ Data was filtered for blank agar plates, leaving me with 12,272 images. The data
 
 ## Baseline Model
 
-The baseline model was a 3 epoch YOLO model. This model netted a relatively low performing model.
+The baseline model was a 3 epoch YOLO model. This attempt netted a relatively low performing model.
 
 Metrics: 
 
@@ -110,13 +112,12 @@ https://user-images.githubusercontent.com/88344284/232660688-2e50dcdf-8d53-46f1-
 
 
 
-The [bacteria_env](bacteria_env) is required for this application to run properly.
 
 #### Results
-My final YOLO model takes images as input and consists of __many__ hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output is then passed to the next layer to detect more complicated features. This continues until the final output layer. YOLO utilizes parrellel processing of the image to classify objects as well as regress around the objects. This allows the model to be much faster than dual stage detectors such as faster RCNN. For those of you interested, here is [Ultralytic's github](https://github.com/ultralytics/ultralytics). 
+My final YOLO model takes images as input and contains __many__ hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output is then passed to the next layer to detect more complicated features. This continues until the classification/regression layer. YOLO utilizes parrellel processing of the image to classify objects as well as regress around the objects. This allows the model to be much faster than dual stage detectors such as faster RCNN. For those of you interested, here is [Ultralytic's github](https://github.com/ultralytics/ultralytics). 
 
 
-During training, the model continues to refine the layers and adjust the weight of specific neurons until it can no longer improve itself. After 10 epochs of no improvement, the model will stop itself and save the model at whichever epoch had the highest score. My model precede to run for 87 epochs before leveling out and stopping itself at 97 epochs. This model was then saved and utilized in the application deployment. 
+During training, the model continues to refine the layers and adjust the weight of specific neurons until it can no longer improve itself. After 10 epochs of no improvement, the model will stop itself and save the model at whichever epoch had the highest score. My model proceded to run for 87 epochs before leveling out and stopping itself at 97 epochs. This model was then saved and utilized in the application deployment. 
 
 
 After training, the test set is introduced to the model to test the score on unseen data. Here are the final scores:
@@ -133,3 +134,8 @@ Below is a summary of all results:
 | box_loss | cls_loss | dfl_loss | precision | recall | mAP50 | map50-95 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 0.969  | 0.39184  | 1.0861  | 0.966  | 0.946  | 0.971  | 0.701  |
+
+
+
+
+__PLEASE NOTE THIS PROJECT WAS DONE FOR ACADEMIC PURPOSES ONLY__
