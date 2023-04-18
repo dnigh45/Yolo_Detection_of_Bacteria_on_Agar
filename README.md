@@ -70,7 +70,7 @@ Metrics:
 If you require an explanation of these results, please see [here](https://blog.paperspace.com/mean-average-precision/).
 
 ## Exploratory Modeling
-For my second model, I improved on our first model. Using the pretrained weights from the YOLO repository, I performed a 10 epoch training regement. This vastly improved my performance.
+For my second model, I improved on my first model. Using the pretrained weights from the YOLO repository, I performed a 10 epoch training regement. This vastly improved my performance.
 
 Metrics: 
 
