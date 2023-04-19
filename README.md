@@ -5,7 +5,8 @@
 <p align="center">
 <img src='images/935.jpg' width="720" height="720" />
 </p>
-
+<h4 style="text-align: center;">Agar Plate with 90 labelled C.albicans colonies</h4>
+<h5 style="text-align: center;">Click Image to Zoom</h5>
 
 #### Team Members
 Dietrich Nigh
@@ -14,14 +15,14 @@ Dietrich Nigh
 #### Summary of Repository Contents:
 * NeuroSYS Research provided the data for this content on a academic license.
     * Data consisted of 18,000 images containing five different microorganisms as well as accompanying annotations of colonies.
-        * _S.aureus_
-        * _B.subtilis_
-        * _P.aeruginsoa_
-        * _E.coli_
-        * _C.albicans_
-* [Exploratory Notebooks](notebooks/) from each member of this group
-* A copy of our [final presentation](FinalPresentation.pdf) in PDF format
-* A copy of our [final notebook](FinalNotebook.ipynb) containing detailed analysis and accompanying code
+        * _S.aureus_ - Leading Cause of Skin Infection
+        * _B.subtilis_ - Food Poisoning
+        * _P.aeruginsoa_ - Pneumonia and Other Infections
+        * _E.coli_ - Food Poisoning and UTIs
+        * _C.albicans_ - Thrush and Yeast Infections
+* [Exploratory Notebooks](notebooks/)
+* A copy of my [presentation](./yolo_detection_of_bacteria_presentation_slides.pdf) in PDF format
+* A copy of my [notebook](./yolo_detection_of_bacteria_notebook.ipynb) containing detailed analysis and accompanying code
 
 
 ## Business Understanding of the Problem
@@ -35,6 +36,9 @@ The model chosen for this task is YOLO. YOLO is a single stage object detection 
 If able, I would like to acquire more funding to expand the species imaged. This would require many more agar plates, a team of annotators, retraining of the model, and finally a more polished deployment. Hopefully, I would be able to license this product as well.
 
 <img src='https://editor.analyticsvidhya.com/uploads/1512812.png' width="540" height="270" />
+
+###### Image provided by Analytics Vidhya, www.analyticsvidhya.com 
+
 
 
 #### Limitations of Our Data
@@ -138,6 +142,8 @@ Below is a summary of all results:
 | 0.969  | 0.39184  | 1.0861  | 0.966  | 0.946  | 0.971  | 0.701  |
 
 
+## Future Steps
 
+This product has the potential to cut down the resources and time needed for many diagnostics. I would like to expand its capabilities but require financial backing to be able to do so. If funding is acquired, I would expand this proof of concept to more medically, and research, relevant specimens. Once these organisms have been identified and acquired, several thousand agar plates will be made and imaged per species. A hired team would then annotate the images and label them in YOLO format. I would retrain the model using these new labelled images. At that point, I would further develop the web application before releasing it and licensing it to medical and research teams. 
 
 __PLEASE NOTE THIS PROJECT WAS DONE FOR ACADEMIC PURPOSES ONLY__
