@@ -5,8 +5,8 @@
 <p align="center">
 <img src='images/935.jpg' width="720" height="720" />
 </p>
-<h4 style="text-align: center;">Agar Plate with 90 labelled C.albicans colonies</h4>
-<h5 style="text-align: center;">Click Image to Zoom</h5>
+<h4 align="center">Agar Plate with 90 labelled C.albicans colonies</h4>
+<h5 align="center">Click Image to Zoom</h5>
 
 #### Team Members
 Dietrich Nigh
