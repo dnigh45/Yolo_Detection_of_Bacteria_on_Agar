@@ -115,7 +115,7 @@ https://user-images.githubusercontent.com/80785218/233215677-5d02d13b-86c3-4449-
 
 
 
-If you would like to watch the video with audo explaining the product please click [here](https://www.youtube.com/watch?v=sgkTrAilsyQ)
+If you would like to watch the video with audio explaining the product please click [here](https://www.youtube.com/watch?v=sgkTrAilsyQ)
 
 #### Results
 My final YOLO model takes images as input and contains __many__ hidden layers. The first layer is a convolutional layer that applies a set of filters to the input image to detect certain features in the image. The output is then passed to the next layer to detect more complicated features. This continues until the classification/regression layer. YOLO utilizes parrellel processing of the image to classify objects as well as regress around the objects. This allows the model to be much faster than dual stage detectors such as faster RCNN. For those of you interested, here is [Ultralytic's github](https://github.com/ultralytics/ultralytics). 
